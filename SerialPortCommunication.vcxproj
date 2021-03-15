@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{05cae1e8-6d89-4d67-821e-610f0f6eeb86}</ProjectGuid>
+    <ProjectGuid>{4f9d7512-8e38-4792-b9ef-ca969782fd23}</ProjectGuid>
     <RootNamespace>SerialPortCommunication</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -147,10 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SerialPort.cpp" />
+    <ClCompile Include="Src\SerialPort.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SerialPort.h" />
+    <ClInclude Include="Src\SerialPort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
