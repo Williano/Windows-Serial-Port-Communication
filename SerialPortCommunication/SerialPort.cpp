@@ -33,3 +33,13 @@ SerialPort::SerialPort(const char* portName) {
 		}
 	}
 }
+
+
+SerialPort::~SerialPort()
+{
+	if (this->m_isConnected)
+	{
+		this->m_isConnected = false;
+		CloseHandle(this->m_handler);
+	}
+}
