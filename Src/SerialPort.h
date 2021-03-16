@@ -25,16 +25,17 @@ public:
 
 
 
-	// Reading bytes from serial port to buffer, returns read bytes count, or if error occurs, returns 0
+	// Reads bytes from serial port to buffer, returns read bytes count, or if error occurs, returns 0
 	int readSerialPort(const char* buffer, unsigned int bufferSize);
 
 
-	// Sending provided buffer to serial port, returns true if succeed, false if not.
+	// Sends provided buffer to serial port, returns true if succeed, false if not.
 	bool writeSerialPort(const char* buffer, unsigned int bufferSize);
 
 
+	// Checks if serial port is connected.
 	bool isConnected();
 
-
+	// Close port 
 	void closeSerial();
 };
