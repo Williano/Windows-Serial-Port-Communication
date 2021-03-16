@@ -38,6 +38,7 @@ int main()
 	}
 
 
+	// Recieves data from COM port
 	if (commPort->isConnected())
 	{
 		int dataReceived = commPort->readSerialPort(receivedData, DATA_LENGTH);
