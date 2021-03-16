@@ -23,8 +23,16 @@ public:
 	explicit SerialPort(const char* portName);
 	~SerialPort();
 
+
+	/*
+		Sending provided buffer to serial port,
+		returns true if succeed, false if not
+	*/
 	int readSerialPort(const char* buffer, unsigned int bufferSize);
+
 	bool writeSerialPort(const char* buffer, unsigned int bufferSize);
+
+
 	bool isConnected();
 	void closeSerial();
 };

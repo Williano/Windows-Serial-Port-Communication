@@ -75,6 +75,7 @@ int SerialPort::readSerialPort(const char* buffer, unsigned int buffer_size)
 }
 
 
+
 bool SerialPort::writeSerialPort(const char* buffer, unsigned int bufferSize)
 {
 	DWORD bytesSend;
