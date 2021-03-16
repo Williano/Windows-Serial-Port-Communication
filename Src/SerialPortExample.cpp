@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-const char* portNumber = "\\\\.\\COM2";
+const char* portNumber = "\\\\.\\COM4";
 
 SerialPort* commPort;
 
