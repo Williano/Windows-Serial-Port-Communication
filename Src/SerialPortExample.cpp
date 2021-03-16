@@ -9,7 +9,7 @@ SerialPort* commPort;
 const char* portNumber = "\\\\.\\COM4";
 const char* data = "Test\n";
 
-char receivedData[DATA_LENGTH];
+//char receivedData[DATA_LENGTH];
 
 
 int main()
@@ -39,18 +39,18 @@ int main()
 
 
 	// Recieves data from COM port
-	if (commPort->isConnected())
-	{
-		int dataReceived = commPort->readSerialPort(receivedData, DATA_LENGTH);
+	//if (commPort->isConnected())
+	//{
+	//	int dataReceived = commPort->readSerialPort(receivedData, DATA_LENGTH);
 
-		if (dataReceived)
-		{
-			std::cout << receivedData << '\n';
+	//	if (dataReceived)
+	//	{
+	//		std::cout << receivedData << '\n';
 
-		}
-		else
-		{
-			std::cerr << "Error occured reading data" << "\n";
-		}
-	}
+	//	}
+	//	else
+	//	{
+	//		std::cerr << "Error occured reading data" << "\n";
+	//	}
+	//}
 }
