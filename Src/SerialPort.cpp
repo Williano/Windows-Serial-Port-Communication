@@ -43,3 +43,64 @@ SerialPort::~SerialPort()
 		CloseHandle(this->m_handler);
 	}
 }
+
+
+int SerialPort::readSerialPort(const char* buffer, unsigned int buffer_size)
+{
+	DWORD bytesRead{};
+	unsigned int toRead = 0;
+
+	ClearCommError(this->m_handler, &this->m_erros, &this->m_status);
+
+	if (this->m_status.cbInQue > 0)
+	{
+		if (this->m_status.cbInQue > buffer_size)
+		{
+			toRead = buffer_size;
+		}
+		else
+		{
+			toRead = this->m_status.cbInQue;
+		}
+	}
+
+	memset((void*)buffer, 0, buffer_size);
+
+	if (ReadFile(this->m_handler, (void*)buffer, toRead, &bytesRead, NULL))
+	{
+		return bytesRead;
+	}
+
+	return 0;
+}
+
+
+bool SerialPort::writeSerialPort(const char* buffer, unsigned int bufferSize)
+{
+	DWORD bytesSend;
+
+	if (!WriteFile(this->m_handler, (void*)buffer, bufferSize, &bytesSend, 0))
+	{
+		ClearCommError(this->m_handler, &this->m_erros, &this->m_status);
+		return false;
+	}
+
+	return true;
+}
+
+
+bool SerialPort::isConnected()
+{
+	if (!ClearCommError(this->m_handler, &this->m_erros, &this->m_status))
+	{
+		this->m_isConnected = false;
+	}
+
+	return this->m_isConnected;
+}
+
+
+void SerialPort::closeSerial()
+{
+	CloseHandle(this->m_handler);
+}
