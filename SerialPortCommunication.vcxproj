@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Src\SerialPort.cpp" />
+    <ClCompile Include="Src\SerialPortExample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\SerialPort.h" />
