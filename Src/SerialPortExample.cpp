@@ -4,12 +4,17 @@
 #include <iostream>
 
 
+// Function prototypes
+void autoConnect();
+void sendDataToPort();
+void readDataFromPort();
+
 SerialPort* commPort;
 
-const char* portNumber = "\\\\.\\COM4";
+const char* portNumber = "\\\\.\\COM6";
 const char* data = "Test\n";
 
-//char receivedData[DATA_LENGTH];
+char receivedData[DATA_LENGTH];
 
 
 int main()
@@ -57,3 +62,33 @@ int main()
 	//	}
 	//}
 }
+
+
+
+void autoConnect()
+{
+	while (1)
+	{
+		std::cout << "Searching i progress";
+
+		while (!commPort->isConnected())
+		{
+			Sleep(100);
+			std::cout << ".";
+			commPort = new SerialPort(portNumber);
+		}
+
+		if (commPort->isConnected())
+		{
+			std::cout << std::endl << "Connection established at port" << portNumber << std::endl;
+		}
+	}
+}
+
+
+void sendDataToPort()
+{}
+
+
+void readDataFromPort()
+{}
