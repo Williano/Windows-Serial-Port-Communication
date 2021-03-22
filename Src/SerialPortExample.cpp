@@ -24,16 +24,19 @@ int main()
 	// Sends data to COM port
 	if (commPort->isConnected())
 	{
-		bool dataSent = commPort->writeSerialPort(data, DATA_LENGTH);
-
-		if (dataSent)
+		while (commPort->isConnected())
 		{
-			std::cout << "Data Sent Successfully" << std::endl;
+			bool dataSent = commPort->writeSerialPort(data, DATA_LENGTH);
 
-		}
-		else
-		{
-			std::cerr << "Data sending failed" << std::endl;
+			if (dataSent)
+			{
+				std::cout << "Data Sent Successfully" << std::endl;
+
+			}
+			else
+			{
+				std::cerr << "Data sending failed" << std::endl;
+			}
 		}
 	}
 
