@@ -4,7 +4,7 @@
 #define WAIT_TIME 2000
 #define MAX_DATA_LENGTH
 
-#include <Windows.h>
+#include <windows.h>
 #include <iostream>
 
 
