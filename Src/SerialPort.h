@@ -71,7 +71,7 @@ public:
 	// Connection State
 	void connect();
 	void disConnect();
-	void isConnected();
+	bool isConnected();
 
 
 	// Destructor
