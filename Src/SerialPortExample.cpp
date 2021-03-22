@@ -96,4 +96,8 @@ void sendDataToPort()
 
 
 void readDataFromPort()
-{}
+{
+	int readData = commPort->readSerialPort(receivedData, MAX_DATA_LENGTH);
+	printf("%s", receivedData);
+	Sleep(10);
+}
