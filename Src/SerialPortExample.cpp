@@ -1,4 +1,4 @@
-﻿#define DATA_LENGTH 255
+﻿#define MAX_DATA_LENGTH 255
 
 #include "SerialPort.h"
 #include <iostream>
@@ -14,7 +14,7 @@ SerialPort* commPort;
 const char* portNumber = "\\\\.\\COM6";
 const char* data = "Test\n";
 
-char receivedData[DATA_LENGTH];
+char receivedData[MAX_DATA_LENGTH];
 
 
 int main()
@@ -31,7 +31,7 @@ int main()
 	{
 		while (commPort->isConnected())
 		{
-			bool dataSent = commPort->writeSerialPort(data, DATA_LENGTH);
+			bool dataSent = commPort->writeSerialPort(data, MAX_DATA_LENGTH);
 
 			if (dataSent)
 			{
@@ -49,7 +49,7 @@ int main()
 	// Recieves data from COM port
 	//if (commPort->isConnected())
 	//{
-	//	int dataReceived = commPort->readSerialPort(receivedData, DATA_LENGTH);
+	//	int dataReceived = commPort->readSerialPort(receivedData, MAX_DATA_LENGTH);
 
 	//	if (dataReceived)
 	//	{
@@ -87,7 +87,12 @@ void autoConnect()
 
 
 void sendDataToPort()
-{}
+{
+	unsigned int delayTime = 1000;
+
+	commPort->writeSerialPort(data, MAX_DATA_LENGTH);
+	Sleep(delayTime);
+}
 
 
 void readDataFromPort()
