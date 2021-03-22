@@ -4,6 +4,7 @@
 SerialPort::SerialPort(const char* portName) {
 
 	this->m_isConnected = false;
+
 	this->m_handler = CreateFileA(static_cast<LPCSTR>(portName), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (this->m_handler == INVALID_HANDLE_VALUE)
@@ -27,9 +28,23 @@ SerialPort::SerialPort(const char* portName) {
 		}
 		else
 		{
-			this->m_isConnected = true;
-			PurgeComm(this->m_handler, PURGE_RXCLEAR | PURGE_TXCLEAR);
-			Sleep(WAIT_TIME);
+			dcbSerialParameters.BaudRate = CBR_9600;
+			dcbSerialParameters.ByteSize = 8;
+			dcbSerialParameters.StopBits = ONESTOPBIT;
+			dcbSerialParameters.Parity = NOPARITY;
+			dcbSerialParameters.fDtrControl = DTR_CONTROL_ENABLE;
+
+			if (!SetCommState(this->m_handler, &dcbSerialParameters))
+			{
+				std::cout << "ALERT:: Coud not set serial port parameters\n";
+			}
+			else
+			{
+
+				this->m_isConnected = true;
+				PurgeComm(this->m_handler, PURGE_RXCLEAR | PURGE_TXCLEAR);
+				Sleep(WAIT_TIME);
+			}
 		}
 	}
 }
