@@ -1,4 +1,5 @@
 ﻿#define MAX_DATA_LENGTH 255
+#define SEND
 
 #include "SerialPort.h"
 #include <iostream>
@@ -11,7 +12,7 @@ void readDataFromPort();
 
 SerialPort* commPort;
 
-const char* portNumber = "\\\\.\\COM6";
+const char* portNumber = "\\\\.\\COM3";
 const char* data = "Test\n";
 
 char receivedData[MAX_DATA_LENGTH];
@@ -23,44 +24,46 @@ int main()
 	// Creates Serial Port instance and initialize with COM port
 	commPort = new SerialPort(portNumber);
 
-	std::cout << "Is connected: " << commPort->isConnected() << std::endl;
+	autoConnect();
+
+	//std::cout << "Is connected: " << commPort->isConnected() << std::endl;
 
 
-	// Sends data to COM port
-	if (commPort->isConnected())
-	{
-		while (commPort->isConnected())
-		{
-			bool dataSent = commPort->writeSerialPort(data, MAX_DATA_LENGTH);
-
-			if (dataSent)
-			{
-				std::cout << "Data Sent Successfully" << std::endl;
-
-			}
-			else
-			{
-				std::cerr << "Data sending failed" << std::endl;
-			}
-		}
-	}
-
-
-	// Recieves data from COM port
+	//// Sends data to COM port
 	//if (commPort->isConnected())
 	//{
-	//	int dataReceived = commPort->readSerialPort(receivedData, MAX_DATA_LENGTH);
-
-	//	if (dataReceived)
+	//	while (commPort->isConnected())
 	//	{
-	//		std::cout << receivedData << '\n';
+	//		bool dataSent = commPort->writeSerialPort(data, MAX_DATA_LENGTH);
 
-	//	}
-	//	else
-	//	{
-	//		std::cerr << "Error occured reading data" << "\n";
+	//		if (dataSent)
+	//		{
+	//			std::cout << "Data Sent Successfully" << std::endl;
+
+	//		}
+	//		else
+	//		{
+	//			std::cerr << "Data sending failed" << std::endl;
+	//		}
 	//	}
 	//}
+
+
+	//// Recieves data from COM port
+	////if (commPort->isConnected())
+	////{
+	////	int dataReceived = commPort->readSerialPort(receivedData, MAX_DATA_LENGTH);
+
+	////	if (dataReceived)
+	////	{
+	////		std::cout << receivedData << '\n';
+
+	////	}
+	////	else
+	////	{
+	////		std::cerr << "Error occured reading data" << "\n";
+	////	}
+	////}
 }
 
 
@@ -69,7 +72,7 @@ void autoConnect()
 {
 	while (1)
 	{
-		std::cout << "Searching i progress";
+		std::cout << "Searching in progress";
 
 		while (!commPort->isConnected())
 		{
@@ -82,6 +85,19 @@ void autoConnect()
 		{
 			std::cout << std::endl << "Connection established at port" << portNumber << std::endl;
 		}
+
+#ifdef SEND
+		while (commPort->isConnected())
+		{
+			sendDataToPort();
+		}
+#else
+		while (commPort->isConnected())
+		{
+			readDataFromPort();
+		}
+#endif
+
 	}
 }
 
